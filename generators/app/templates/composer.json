@@ -1,0 +1,15 @@
+{
+	"name": "crosslink/<%- kebabName %>",
+	"authors": [],
+	"autoload": {
+		"psr-4": {
+			"<%- capitalizedName %>\\": "src/"
+		}
+	},
+	"repositories": [
+		{
+			"type": "vcs",
+			"url": "https://github.com/crosslink-ch/wp-utilitatem"
+		}
+	]
+}

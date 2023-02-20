@@ -1,0 +1,14 @@
+{
+	"extends": "@tsconfig/recommended/tsconfig.json",
+	"compilerOptions": {
+		"target": "ES2022",
+		"emitDeclarationOnly": true,
+		"declaration": true,
+		"declarationMap": true,
+		"jsx": "preserve",
+		"noImplicitAny": false,
+		"composite": true,
+		"types": [ "custom-types" ],
+		"typeRoots": [ "./types", "./node_modules/@types" ]
+	}
+}

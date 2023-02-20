@@ -1,0 +1,37 @@
+{
+	"name": "<%- kebabName %>",
+	"version": "1.0.0",
+	"description": "",
+	"main": "index.js",
+	"scripts": {
+		"build-js": "wp-scripts build",
+		"build-scss": "sass ./scss:./build/css",
+		"start-js": "wp-scripts start",
+		"start-scss": "sass ./scss:./build/css --watch",
+		"types": "tsc -b --watch",
+		"build": "concurrently 'npm:build-*'",
+		"start": "cross-env NODE_ENV=development concurrently 'npm:start-*'",
+		"zip-dev": "wp-scripts plugin-zip",
+		"zip-prod": "composer install --no-dev; npm run build; wp-scripts plugin-zip; composer install",
+		"dist": "npm run zip-prod; rm -rf dist; mkdir dist; mv <%- kebabName %>.zip dist; cd dist; unzip -q <%- kebabName %>.zip; rm <%- kebabName %>.zip;",
+		"format-js": "wp-scripts format 'js/**/*' 'package.json' 'composer.json'",
+		"format-php": "./vendor/bin/phpcbf .",
+		"format-scss": "wp-scripts lint-style 'scss/**/*' --fix",
+		"format": "concurrently 'npm:format-*'"
+	},
+	"files": [
+		"*.php",
+		"*.css",
+		"*.png",
+		"assets/**/*",
+		"build/**/*",
+		"src/**/*",
+		"vendor/**/*",
+		"woocommerce/**/*",
+		"templates/**/*",
+		"template-parts/**/*"
+	],
+	"keywords": [],
+	"author": "",
+	"license": "ISC"
+}

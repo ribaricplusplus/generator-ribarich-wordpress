@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<ruleset name="Sane WordPress">
+  <description>
+    Sane WordPress linting rules.
+  </description>
+  <config name="installed_paths" value="vendor/wp-coding-standards/wpcs"/>
+  <arg name="extensions" value="php"/>
+  <exclude-pattern>vendor/*</exclude-pattern>
+  <exclude-pattern>node_modules/*</exclude-pattern>
+  <exclude-pattern>scripts/*</exclude-pattern>
+  <exclude-pattern>dist/*</exclude-pattern>
+  <exclude-pattern>build/*</exclude-pattern>
+  <exclude-pattern>tests/woocommerce/*</exclude-pattern>
+  <rule ref="WordPress">
+    <exclude name="Squiz.Commenting.FileComment.Missing" />
+    <exclude name="Squiz.Commenting.FileComment.MissingPackageTag" />
+    <exclude name="Squiz.Commenting.FunctionComment" />
+    <exclude name="Squiz.Commenting.FunctionComment.MissingParamComment" />
+    <exclude name="Squiz.Commenting.FunctionComment.ParamCommentFullStop" />
+    <exclude name="Squiz.Commenting.FunctionComment.Missing" />
+    <exclude name="Squiz.Commenting.InlineComment.InvalidEndChar" />
+    <exclude name="Generic.Commenting.DocComment.MissingShort" />
+    <exclude name="Wordpress.Files.FileName" />
+    <exclude name="Wordpress.PHP.YodaConditions" />
+    <exclude name="Squiz.Commenting.ClassComment.Missing" />
+    <exclude name="Squiz.Commenting.VariableComment.Missing" />
+  </rule>
+</ruleset>
