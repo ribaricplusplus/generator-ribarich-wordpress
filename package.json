@@ -78,6 +78,6 @@
     "pretest": "eslint .",
     "test": "jest"
   },
-  "repository": "ribaricplusplus/generator-ribarich-wordpress",
+  "repository": "https://github.com/ribaricplusplus/generator-ribarich-wordpress",
   "license": "MIT"
 }
