@@ -1,5 +1,6 @@
-# generator-ribarich-wordpress [![NPM version][npm-image]][npm-url] [![Build Status][travis-image]][travis-url] [![Dependency Status][daviddm-image]][daviddm-url] [![Coverage percentage][coveralls-image]][coveralls-url]
-> Generate a WordPress plugin or theme
+# generator-ribarich-wordpress
+
+Generate a WordPress plugin or theme
 
 ## Installation
 
