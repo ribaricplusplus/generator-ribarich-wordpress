@@ -6,6 +6,11 @@
 			"<%- capitalizedName %>\\": "src/"
 		}
 	},
+	"autoload-dev": {
+		"psr-4": {
+			"<%- capitalizedName %>\\Tests\\": "tests/"
+		}
+	},
 	"repositories": [
 		{
 			"type": "vcs",

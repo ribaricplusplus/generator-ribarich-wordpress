@@ -8,7 +8,8 @@
 		"build-scss": "sass ./scss:./build/css",
 		"start-js": "wp-scripts start",
 		"start-scss": "sass ./scss:./build/css --watch",
-		"types": "tsc -b --watch",
+		"start-types": "tsc -b --watch",
+		"build-types": "tsc -b",
 		"build": "concurrently 'npm:build-*'",
 		"start": "cross-env NODE_ENV=development concurrently 'npm:start-*'",
 		"zip-dev": "wp-scripts plugin-zip",
@@ -17,7 +18,8 @@
 		"format-js": "wp-scripts format 'js/**/*' 'package.json' 'composer.json'",
 		"format-php": "./vendor/bin/phpcbf .",
 		"format-scss": "wp-scripts lint-style 'scss/**/*' --fix",
-		"format": "concurrently 'npm:format-*'"
+		"format": "concurrently 'npm:format-*'",
+		"test-phpunit": "./vendor/bin/phpunit --configuration ./phpunit.xml"
 	},
 	"files": [
 		"*.php",

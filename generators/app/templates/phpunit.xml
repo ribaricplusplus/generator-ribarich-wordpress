@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<phpunit
+	bootstrap="tests/bootstrap.php"
+	backupGlobals="false"
+	colors="true"
+	convertErrorsToExceptions="true"
+	convertNoticesToExceptions="true"
+	convertWarningsToExceptions="true"
+	>
+	<php>
+        <env name="WP_PHPUNIT__TESTS_CONFIG" value="tests/wp-config.php" />
+        <env name="_DB_NAME" value="local" />
+        <env name="_DB_USER" value="root" />
+        <env name="_DB_PASSWORD" value="root" />
+        <env name="_DB_HOST" value="localhost" />
+    </php>
+	<testsuites>
+		<testsuite name="testing">
+			<directory suffix="Test.php">./tests/</directory>
+		</testsuite>
+	</testsuites>
+</phpunit>

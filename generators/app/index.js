@@ -14,23 +14,29 @@ module.exports = class extends Generator {
         type: "input",
         name: "destinationFolder",
         message: "Folder to scaffold the project in",
-        default: this.destinationPath()
+        default: this.destinationPath(),
       },
       {
         type: "input",
         name: "projectName",
-        message: "Project name"
+        message: "Project name",
       },
       {
         type: "list",
         name: "projectType",
         message: "Project type",
         choices: ["theme", "plugin"],
-        default: "theme"
-      }
+        default: "theme",
+      },
+      {
+        type: "input",
+        name: "localDomain",
+        message:
+          "Domain name of the local server. Do NOT include the protocol, e.g. http://",
+      },
     ];
 
-    return this.prompt(prompts).then(props => {
+    return this.prompt(prompts).then((props) => {
       // To access props later use this.props.someAnswer;
       this.props = props;
     });
@@ -53,7 +59,9 @@ module.exports = class extends Generator {
       capitalizedName:
         this.props.projectName[0].toUpperCase() +
         _.camelCase(this.props.projectName.substring(1)),
-      projectType: this.props.projectType
+      projectType: this.props.projectType,
+      localDomain: this.props.localDomain,
+      isTheme,
     };
     const pluginText = (() => {
       if (isTheme) {
@@ -80,7 +88,7 @@ module.exports = class extends Generator {
         : `${templateOptions.capitalizedName.toUpperCase()}_PLUGIN_FILE`;
     const files = fg.sync("**/*", { dot: true, cwd: this.templatePath() });
     this.fs.copyTpl(
-      files.map(file => path.join(this.templatePath(), file)),
+      files.map((file) => path.join(this.templatePath(), file)),
       this.destinationPath(),
       templateOptions
     );
@@ -99,7 +107,8 @@ module.exports = class extends Generator {
       "@tsconfig/recommended",
       "@wordpress/scripts",
       "sass",
-      "typescript"
+      "typescript",
+      "concurrently",
     ]);
   }
 
@@ -108,11 +117,14 @@ module.exports = class extends Generator {
       "require",
       "--dev",
       "squizlabs/php_codesniffer",
-      "wp-coding-standards/wpcs"
+      "wp-coding-standards/wpcs",
+      "wp-phpunit/wp-phpunit",
+      "yoast/phpunit-polyfills",
     ]);
     this.spawnCommandSync("composer", [
       "require",
-      "crosslink-ch/wp-utilitatem"
+      "crosslink-ch/wp-utilitatem",
     ]);
+    this.spawnCommandSync("git", ["init", "-b", "main"]);
   }
 };
