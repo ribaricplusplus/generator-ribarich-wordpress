@@ -109,6 +109,8 @@ module.exports = class extends Generator {
       "sass",
       "typescript",
       "concurrently",
+      "husky",
+      "@ribarich/lint-staged",
     ]);
   }
 

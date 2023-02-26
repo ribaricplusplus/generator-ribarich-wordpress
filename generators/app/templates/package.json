@@ -19,7 +19,16 @@
 		"format-php": "./vendor/bin/phpcbf .",
 		"format-scss": "wp-scripts lint-style 'scss/**/*' --fix",
 		"format": "concurrently 'npm:format-*'",
-		"test-phpunit": "./vendor/bin/phpunit --configuration ./phpunit.xml"
+		"test-phpunit": "./vendor/bin/phpunit --configuration ./phpunit.xml",
+		"prepare": "husky install; husky add .husky/pre-commit ./node_modules/.bin/lint-staged"
+	},
+	"lint-staged": {
+		"*.{js,jsx,json,ts,tsx,yml,yaml}": [
+			"wp-scripts format"
+		],
+		"*.php": [
+			"./vendor/bin/phpcbf"
+		]
 	},
 	"files": [
 		"*.php",

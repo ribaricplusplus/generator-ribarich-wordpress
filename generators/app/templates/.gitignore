@@ -36,3 +36,4 @@ phpunit-watcher.yml
 package-lock.json
 .wpenv
 /css/
+.husky/
