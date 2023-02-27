@@ -28,6 +28,9 @@
 		],
 		"*.php": [
 			"./vendor/bin/phpcbf"
+		],
+		"*.scss": [
+			"wp-scripts lint-style --fix"
 		]
 	},
 	"files": [
