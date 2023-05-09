@@ -101,6 +101,16 @@ module.exports = class extends Generator {
       this.fs.delete(this.destinationPath("functions.php"));
     }
 
+    this.fs.move(
+      this.destinationPath("gitignore-template"),
+      this.destinationPath(".gitignore")
+    );
+
+    this.fs.move(
+      this.destinationPath("gitattributes-template"),
+      this.destinationPath(".gitattributes")
+    );
+
     await this.addDependencies(["@wordpress/dom-ready"]);
     await this.addDevDependencies([
       "cross-env",
