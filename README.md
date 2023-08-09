@@ -2,6 +2,8 @@
 
 Generate a WordPress plugin or theme
 
+Tutorial about how to use the code scaffolded by this generator: https://www.youtube.com/watch?v=a-S6bYo0kT0
+
 ## Installation
 
 First, install [Yeoman](http://yeoman.io) and generator-ribarich-wordpress using [npm](https://www.npmjs.com/) (we assume you have pre-installed [node.js](https://nodejs.org/)).
