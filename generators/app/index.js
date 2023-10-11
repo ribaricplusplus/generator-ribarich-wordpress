@@ -4,6 +4,7 @@ const yosay = require("yosay");
 const path = require("path");
 const _ = require("lodash");
 const fg = require("fast-glob");
+const getLatestVersion = require("get-latest-version");
 
 module.exports = class extends Generator {
   prompting() {
@@ -111,8 +112,8 @@ module.exports = class extends Generator {
       this.destinationPath(".gitattributes")
     );
 
-    await this.addDependencies(["@wordpress/dom-ready"]);
-    await this.addDevDependencies([
+    const dependencies = ["@wordpress/dom-ready"];
+    const devDependencies = [
       "cross-env",
       "@tsconfig/recommended",
       "@wordpress/scripts",
@@ -121,10 +122,48 @@ module.exports = class extends Generator {
       "concurrently",
       "husky",
       "@ribarich/lint-staged",
-    ]);
+    ];
+
+    let dependencyVersions = dependencies.map((dependency) =>
+      getLatestVersion(dependency)
+    );
+
+    let devDependencyVersions = devDependencies.map((dependency) =>
+      getLatestVersion(dependency)
+    );
+
+    dependencyVersions = await Promise.all(dependencyVersions);
+    devDependencyVersions = await Promise.all(devDependencyVersions);
+
+    let rDependencies = dependencies.map((dep, index) => ({
+      [dep]: dependencyVersions[index],
+    }));
+    let rDevDependencies = devDependencies.map((dep, index) => ({
+      [dep]: devDependencyVersions[index],
+    }));
+
+    rDependencies = rDependencies.reduce(
+      (acc, obj) => ({
+        ...acc,
+        [Object.keys(obj)[0]]: Object.values(obj)[0],
+      }),
+      {}
+    );
+
+    rDevDependencies = rDevDependencies.reduce(
+      (acc, obj) => ({
+        ...acc,
+        [Object.keys(obj)[0]]: Object.values(obj)[0],
+      }),
+      {}
+    );
+
+    await this.addDependencies(rDependencies);
+    await this.addDevDependencies(rDevDependencies);
   }
 
   async install() {
+    console.log("installing");
     this.spawnCommandSync("composer", [
       "require",
       "--dev",
