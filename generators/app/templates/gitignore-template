@@ -33,7 +33,6 @@ phpunit-watcher.yml
 .vscode/
 .wp-dev-cache
 *.zip
-package-lock.json
 .wpenv
 /css/
 .husky/
