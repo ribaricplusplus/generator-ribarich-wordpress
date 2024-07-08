@@ -1,12 +1,11 @@
-"use strict";
-const Generator = require("yeoman-generator");
-const yosay = require("yosay");
-const path = require("path");
-const _ = require("lodash");
-const fg = require("fast-glob");
-const getLatestVersion = require("get-latest-version");
+import Generator from "yeoman-generator";
+import yosay from "yosay";
+import path from "path";
+import _ from "lodash";
+import fg from "fast-glob";
+import getLatestVersion from "get-latest-version";
 
-module.exports = class extends Generator {
+export default class extends Generator {
   prompting() {
     this.log(yosay("Generating a WordPress project."));
 
@@ -46,7 +45,7 @@ module.exports = class extends Generator {
   default() {
     if (this.destinationPath() !== this.props.destinationFolder) {
       this.destinationRoot(
-        path.join(this.destinationPath(), this.props.destinationFolder)
+        path.join(this.destinationPath(), this.props.destinationFolder),
       );
     }
   }
@@ -91,25 +90,25 @@ module.exports = class extends Generator {
     this.fs.copyTpl(
       files.map((file) => path.join(this.templatePath(), file)),
       this.destinationPath(),
-      templateOptions
+      templateOptions,
     );
     if (!isTheme) {
       this.fs.delete(this.destinationPath("style.css"));
       this.fs.copy(
         this.destinationPath("functions.php"),
-        this.destinationPath(templateOptions.kebabName + ".php")
+        this.destinationPath(templateOptions.kebabName + ".php"),
       );
       this.fs.delete(this.destinationPath("functions.php"));
     }
 
     this.fs.move(
       this.destinationPath("gitignore-template"),
-      this.destinationPath(".gitignore")
+      this.destinationPath(".gitignore"),
     );
 
     this.fs.move(
       this.destinationPath("gitattributes-template"),
-      this.destinationPath(".gitattributes")
+      this.destinationPath(".gitattributes"),
     );
 
     const dependencies = ["@wordpress/dom-ready"];
@@ -125,11 +124,11 @@ module.exports = class extends Generator {
     ];
 
     let dependencyVersions = dependencies.map((dependency) =>
-      getLatestVersion(dependency)
+      getLatestVersion(dependency),
     );
 
     let devDependencyVersions = devDependencies.map((dependency) =>
-      getLatestVersion(dependency)
+      getLatestVersion(dependency),
     );
 
     dependencyVersions = await Promise.all(dependencyVersions);
@@ -147,7 +146,7 @@ module.exports = class extends Generator {
         ...acc,
         [Object.keys(obj)[0]]: Object.values(obj)[0],
       }),
-      {}
+      {},
     );
 
     rDevDependencies = rDevDependencies.reduce(
@@ -155,7 +154,7 @@ module.exports = class extends Generator {
         ...acc,
         [Object.keys(obj)[0]]: Object.values(obj)[0],
       }),
-      {}
+      {},
     );
 
     await this.addDependencies(rDependencies);
@@ -178,4 +177,4 @@ module.exports = class extends Generator {
     ]);
     this.spawnCommandSync("git", ["init", "-b", "main"]);
   }
-};
+}
