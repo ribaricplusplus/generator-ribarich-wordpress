@@ -25,8 +25,20 @@ export default class extends Generator {
         type: "list",
         name: "projectType",
         message: "Project type",
-        choices: ["theme", "plugin"],
-        default: "theme",
+        choices: [
+          {
+            name: "Parent theme",
+            value: "parent-theme",
+          },
+          {
+            name: "Child theme",
+            value: "child-theme",
+          },
+          {
+            name: "Plugin",
+            value: "plugin",
+          },
+        ],
       },
       {
         type: "input",
@@ -51,7 +63,9 @@ export default class extends Generator {
   }
 
   async writing() {
-    const isTheme = this.props.projectType === "theme";
+    const isTheme = ["parent-theme", "child-theme"].includes(
+      this.props.projectType,
+    );
     const templateOptions = {
       kebabName: _.kebabCase(this.props.projectName),
       snakeName: _.snakeCase(this.props.projectName),
@@ -92,6 +106,7 @@ export default class extends Generator {
       this.destinationPath(),
       templateOptions,
     );
+
     if (!isTheme) {
       this.fs.delete(this.destinationPath("style.css"));
       this.fs.copy(
@@ -99,6 +114,25 @@ export default class extends Generator {
         this.destinationPath(templateOptions.kebabName + ".php"),
       );
       this.fs.delete(this.destinationPath("functions.php"));
+    }
+
+    if (this.props.projectType === "parent-theme") {
+      const parentThemeFiles = [
+        "404.php",
+        "footer.php",
+        "header.php",
+        "index.php",
+      ];
+      const templateFilesPath = path.join(
+        this.templatePath(),
+        "..",
+        "template-files",
+      );
+      this.fs.copyTpl(
+        parentThemeFiles.map((file) => path.join(templateFilesPath, file)),
+        this.destinationPath(),
+        templateOptions,
+      );
     }
 
     this.fs.move(

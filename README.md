@@ -1,4 +1,4 @@
-# generator-ribarich-wordpress
+# Generator Ribarich WordPress
 
 Generate a WordPress plugin or theme
 
@@ -32,6 +32,15 @@ sql_mode = ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,ERROR_FOR_DIVI
 ```
 
 Copying tables slows down test execution, so you can set the environment variable `_PHPUNIT_SKIP_TABLE_COPYING=1` to skip this after the tables have already been copied once.
+
+## Development
+
+Get started with developing this generator.
+
+- Clone the repository
+- npm install
+- npm link
+- yo ribarich-wordpress => Runs the generator as it is in its current state. Make sure that any global version of the generator from npm is uninstalled.
 
 ## License
 
