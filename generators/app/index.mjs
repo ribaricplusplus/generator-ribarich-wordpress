@@ -76,6 +76,7 @@ export default class extends Generator {
       projectType: this.props.projectType,
       localDomain: this.props.localDomain,
       isTheme,
+      wpUtilitatemProjectType: isTheme ? "theme" : "plugin",
     };
     const pluginText = (() => {
       if (isTheme) {
@@ -96,10 +97,9 @@ export default class extends Generator {
       return tmpl(templateOptions);
     })();
     templateOptions.pluginText = pluginText;
-    templateOptions.fileConstant =
-      this.props.projectType === "theme"
-        ? `${templateOptions.capitalizedName.toUpperCase()}_THEME_FILE`
-        : `${templateOptions.capitalizedName.toUpperCase()}_PLUGIN_FILE`;
+    templateOptions.fileConstant = isTheme
+      ? `${templateOptions.capitalizedName.toUpperCase()}_THEME_FILE`
+      : `${templateOptions.capitalizedName.toUpperCase()}_PLUGIN_FILE`;
     const files = fg.sync("**/*", { dot: true, cwd: this.templatePath() });
     this.fs.copyTpl(
       files.map((file) => path.join(this.templatePath(), file)),

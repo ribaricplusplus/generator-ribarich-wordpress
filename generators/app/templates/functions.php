@@ -12,7 +12,7 @@ function <%- snakeName %>_init() {
 				\WpUtm\Interfaces\IDynamicCss::class => \DI\autowire( \<%- capitalizedName %>\DynamicCss::class ),
 				\WpUtm\Interfaces\IDynamicJs::class  => \DI\autowire( \<%- capitalizedName %>\DynamicJs::class ),
 				'main_file'                          => <%- fileConstant %>,
-				'type'                               => '<%- projectType %>',
+				'type'                               => '<%- wpUtilitatemProjectType %>',
 				'prefix'                             => '<%- kebabName %>',
 			),
 		)
