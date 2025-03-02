@@ -3,7 +3,7 @@
 
 define( '<%- fileConstant %>', __FILE__ );
 
-require 'vendor/autoload.php';
+require __DIR__ . '/vendor/autoload.php';
 
 function <%- snakeName %>_init() {
 	$wputm = new \WpUtm\Main(
